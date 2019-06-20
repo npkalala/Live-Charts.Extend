@@ -28,7 +28,7 @@ Installation：
 
 - 3 Compile the project **Live-Charts.Extend**
 
-- 4 Open Target project and import`Live-Charts.Extend.dll` into it. And install the related Live-chart Lib in Nuget as following
+- 4 Open target project and import`Live-Charts.Extend.dll` into it. Then install related Live-chart Lib in Nuget as following
 ![Step 3](Doc/i3.png )
 
 ## 4.Attributes
@@ -45,6 +45,8 @@ The description of the Attributes.
 |Foreground|Set the forground of Title|
 |GaugeTitle| Set the title label|
 |GaugeUnit|Set the unit label|
+|Uses360Mode|Set gauge as full circle|True/False
+|IconSource|Set the image of full circle gauge|source:ImageSource
 
 ## 5.Sample
 - Step 1. Import Lib
