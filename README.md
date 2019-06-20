@@ -65,7 +65,7 @@ The description of the Attributes.
 - Step 2. Insert AuGaugae into you xaml
 ### Sample 1. Half Circle
 ```xml
-<chart:AuGauge Margin="10" From="0" To="160" Value="100" LabelsVisibility="Visible"
+<chart:AuGauge Margin="10" From="0" To="160" Value="21" LabelsVisibility="Visible"
     GaugeBackground="#070707" Foreground="Red"
     GaugeTitle="Speed" GaugeUnit="km/h" >
     <chart:AuGauge.GaugeActiveFill>
