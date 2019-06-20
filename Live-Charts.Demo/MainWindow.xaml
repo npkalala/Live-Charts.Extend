@@ -1,0 +1,155 @@
+﻿<Window x:Class="Live_Charts.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Live_Charts.Demo"
+        xmlns:chart="clr-namespace:Live_Charts.Extend;assembly=Live-Charts.Extend"
+        mc:Ignorable="d"
+        x:Name="BusGauge"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#222222">
+        <Grid Grid.Row="1" ShowGridLines="false">
+            <Grid.Resources>
+                <local:FromColor x:Key="FromColor"></local:FromColor>
+                <local:ToColor x:Key="ToColor"></local:ToColor>
+                <local:TextColor x:Key="TextColor"></local:TextColor>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="row" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+                <Grid.Background>
+                    <ImageBrush x:Name="Image" ImageSource="{Binding IconGaugeLight, ElementName=BusGauge}" Stretch="None" AlignmentX="Center" AlignmentY="Center" Viewport="0.25,0.325,0.5,1">
+                    </ImageBrush>
+                </Grid.Background>
+                <chart:AuGauge x:Name="chart1" Margin="10" From="0" To="160" Value="{Binding V1}" LabelsVisibility="Visible"
+                       GaugeBackground="#070707" Foreground="{Binding Value, ElementName=chart1, Converter={StaticResource TextColor}, ConverterParameter='0,160'}"
+                           GaugeTitle="車速" GaugeUnit="km/h" >
+                    <chart:AuGauge.GaugeActiveFill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{Binding Value, ElementName=chart1, Converter={StaticResource FromColor}, ConverterParameter='0,160'}" Offset="0.0" />
+                            <GradientStop Color="{Binding Value, ElementName=chart1, Converter={StaticResource ToColor}, ConverterParameter='0,160'}" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </chart:AuGauge.GaugeActiveFill>
+                </chart:AuGauge>
+            </Grid>
+            <Grid x:Name="row2" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2">
+                <Grid.Background>
+                    <ImageBrush x:Name="Image1" ImageSource="{Binding IconGaugeLight, ElementName=BusGauge}" Stretch="None" AlignmentX="Center" AlignmentY="Center" Viewport="0.25,0.325,0.5,1">
+                    </ImageBrush>
+                </Grid.Background>
+                <chart:AuGauge x:Name="chart2" Margin="10" From="0" To="9000" Value="{Binding V2}" LabelsVisibility="Visible"
+                       GaugeBackground="#070707" Foreground="{Binding Value, ElementName=chart2, Converter={StaticResource TextColor}, ConverterParameter='0,9000'}" GaugeTitle="轉速" GaugeUnit="RPM" >
+                    <chart:AuGauge.GaugeActiveFill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{Binding Value, ElementName=chart2, Converter={StaticResource FromColor}, ConverterParameter='0,9000'}" Offset="0.0" />
+                            <GradientStop Color="{Binding Value, ElementName=chart2, Converter={StaticResource ToColor}, ConverterParameter='0,9000'}" Offset="1.0" />
+                            <!--<GradientStop Color="#FFE200" Offset="0.0" />
+                        <GradientStop Color="#FF7F00" Offset="1.0" />-->
+                        </LinearGradientBrush>
+                    </chart:AuGauge.GaugeActiveFill>
+                </chart:AuGauge>
+            </Grid>
+            <chart:AuGauge Margin="5"
+                       x:Name="chart3"
+                   Grid.Row="1" Grid.Column="0"
+                   Uses360Mode="True"
+                   From="0" To="6" Value="{Binding V3}" GaugeBackground="#070707"
+                       Foreground="{Binding Value, ElementName=chart3, Converter={StaticResource TextColor}, ConverterParameter='0,6'}"
+                       GaugeTitle="車輛平穩度" GaugeUnit="G" IconSource="{Binding IconStability, ElementName=BusGauge}" >
+                <chart:AuGauge.GaugeRenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"></RotateTransform>
+                        <ScaleTransform ScaleX="1"></ScaleTransform>
+                    </TransformGroup>
+                </chart:AuGauge.GaugeRenderTransform>
+                <chart:AuGauge.GaugeActiveFill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{Binding Value, ElementName=chart3, Converter={StaticResource FromColor}, ConverterParameter='0,6'}" Offset="0.0" />
+                        <GradientStop Color="{Binding Value, ElementName=chart3, Converter={StaticResource ToColor}, ConverterParameter='0,6'}" Offset="1.0" />
+                        <!--<GradientStop Color="#0BBBBA" Offset="0.0" />
+                    <GradientStop Color="#1384D7" Offset="1.0" />-->
+                    </LinearGradientBrush>
+                </chart:AuGauge.GaugeActiveFill>
+            </chart:AuGauge>
+            <chart:AuGauge Margin="5"
+                       x:Name="chart4"
+                   Grid.Row="1" Grid.Column="1"
+                   Uses360Mode="True"
+                   From="0" To="100" Value="{Binding V4}" GaugeBackground="#070707"
+                       Foreground="{Binding Value, ElementName=chart4, Converter={StaticResource TextColor}, ConverterParameter='0,100'}"
+                       GaugeTitle="油門深度" GaugeUnit="Deg" IconSource="{Binding IconAccelerator, ElementName=BusGauge}" >
+                <chart:AuGauge.GaugeRenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"></RotateTransform>
+                        <ScaleTransform ScaleX="1"></ScaleTransform>
+                    </TransformGroup>
+                </chart:AuGauge.GaugeRenderTransform>
+                <chart:AuGauge.GaugeActiveFill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{Binding Value, ElementName=chart4, Converter={StaticResource FromColor}, ConverterParameter='0,100'}" Offset="0.0" />
+                        <GradientStop Color="{Binding Value, ElementName=chart4, Converter={StaticResource ToColor}, ConverterParameter='0,100'}" Offset="1.0" />
+                        <!--<GradientStop Color="#0BBBBA" Offset="0.0" />
+                    <GradientStop Color="#1384D7" Offset="1.0" />-->
+                    </LinearGradientBrush>
+                </chart:AuGauge.GaugeActiveFill>
+            </chart:AuGauge>
+            <chart:AuGauge Margin="5"
+                       x:Name="chart5"
+                   Grid.Row="1" Grid.Column="2"
+                   Uses360Mode="True"
+                   From="0" To="100" Value="{Binding V5}" GaugeBackground="#070707"
+                       Foreground="{Binding Value, ElementName=chart5, Converter={StaticResource TextColor}, ConverterParameter='0,100'}"
+                       GaugeTitle="訊號強度" GaugeUnit="dBm" IconSource="{Binding IconSignal, ElementName=BusGauge}" >
+                <chart:AuGauge.GaugeRenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"></RotateTransform>
+                        <ScaleTransform ScaleX="1"></ScaleTransform>
+                    </TransformGroup>
+                </chart:AuGauge.GaugeRenderTransform>
+                <chart:AuGauge.GaugeActiveFill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{Binding Value, ElementName=chart5, Converter={StaticResource FromColor}, ConverterParameter='0,100'}" Offset="0.0" />
+                        <GradientStop Color="{Binding Value, ElementName=chart5, Converter={StaticResource ToColor}, ConverterParameter='0,100'}" Offset="1.0" />
+                        <!--<GradientStop Color="#FF7F00" Offset="0.0" />
+                    <GradientStop Color="#FFE200" Offset="1.0" />-->
+                    </LinearGradientBrush>
+                </chart:AuGauge.GaugeActiveFill>
+            </chart:AuGauge>
+            <chart:AuGauge Margin="5"
+                       x:Name="chart6"
+                   Grid.Row="1" Grid.Column="3"
+                   Uses360Mode="True"
+                   From="0" To="300" Value="{Binding V6}" GaugeBackground="#070707"
+                       Foreground="{Binding Value, ElementName=chart6, Converter={StaticResource TextColor}, ConverterParameter='0,300'}"
+                       GaugeTitle="基地台延遲" GaugeUnit="G" IconSource="{Binding IconStation, ElementName=BusGauge}" >
+                <chart:AuGauge.GaugeRenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"></RotateTransform>
+                        <ScaleTransform ScaleX="1"></ScaleTransform>
+                    </TransformGroup>
+                </chart:AuGauge.GaugeRenderTransform>
+                <chart:AuGauge.GaugeActiveFill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{Binding Value, ElementName=chart6, Converter={StaticResource FromColor}, ConverterParameter='0,300'}" Offset="0.0" />
+                        <GradientStop Color="{Binding Value, ElementName=chart6, Converter={StaticResource ToColor}, ConverterParameter='0,300'}" Offset="1.0" />
+                        <!--<GradientStop Color="#F50606" Offset="0.0" />
+                        <GradientStop Color="#FD3636" Offset="1.0" />-->
+                    </LinearGradientBrush>
+                </chart:AuGauge.GaugeActiveFill>
+            </chart:AuGauge>
+
+        </Grid>
+    </Grid>
+</Window>
